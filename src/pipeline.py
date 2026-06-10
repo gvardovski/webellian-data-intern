@@ -84,7 +84,7 @@ def clean_sales_data(
 	sales["timestamp"] = pd.to_datetime(sales["timestamp"], errors="coerce")
 	sales = sales.dropna(subset=["timestamp"])
 	sales = sales[(sales["quantity"] > 0) & (sales["price"] > 0)]
-	sales["total_sale"] = sales["quantity"] * sales["price"]
+	sales["total_sale"] = round(sales["quantity"] * sales["price"], 2)
 
 	products["category"] = products["category"].str.strip().str.title()
 	stores["city"] = stores["city"].str.strip().str.title()

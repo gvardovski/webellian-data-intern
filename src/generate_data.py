@@ -90,7 +90,7 @@ def build_sales_csv(output_dir: Path | None = None, row_count: int = 840, day_co
 			store_id = random_generator.choice(store_ids)
 			quantity = random_generator.randint(-1, 77)
 			base_price = PRODUCT_PRICE_BY_ID[product_id]
-			price = round(base_price * quantity, 2)
+			price = base_price
 			day_offset = index % day_count
 			timestamp = start_time + timedelta(
 				days=day_offset,
