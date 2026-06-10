@@ -3,6 +3,7 @@ from src.generate_data import build_products_csv
 from src.generate_data import build_sales_csv
 from src.pipeline import load_sales_csv
 from src.pipeline import load_sales_dataset_and_validate
+from src.pipeline import load_clean_sales_dataset
 
 if __name__ == "__main__":
 	print(build_products_csv())
@@ -10,4 +11,4 @@ if __name__ == "__main__":
 	sales_path = build_sales_csv()
 	print(sales_path)
 	load_sales_csv(sales_path)
-	print(load_sales_dataset_and_validate())
+	load_clean_sales_dataset()

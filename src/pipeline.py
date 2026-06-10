@@ -52,8 +52,8 @@ def validate_sales_data(
 		~sales["product_id"].isin(products["product_id"])
 		| ~sales["store_id"].isin(stores["store_id"])
 	]
-	negative_quantity = sales[sales["quantity"] < 0]
-	negative_price = sales[sales["price"] < 0]
+	negative_quantity = sales[sales["quantity"] <= 0]
+	negative_price = sales[sales["price"] <= 0]
 	timestamp_values = pd.to_datetime(sales["timestamp"], errors="coerce")
 	malformed_timestamps = sales[timestamp_values.isna()]
 
@@ -72,7 +72,27 @@ def validate_sales_data(
 	}
 
 
-def load_sales_dataset_and_validate(
+def clean_sales_data(
+	sales: pd.DataFrame,
+	products: pd.DataFrame,
+	stores: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+	sales = sales.copy()
+	products = products.copy()
+	stores = stores.copy()
+
+	sales["timestamp"] = pd.to_datetime(sales["timestamp"], errors="coerce")
+	sales = sales.dropna(subset=["timestamp"])
+	sales = sales[(sales["quantity"] > 0) & (sales["price"] > 0)]
+	sales["total_sale"] = sales["quantity"] * sales["price"]
+
+	products["category"] = products["category"].str.strip().str.title()
+	stores["city"] = stores["city"].str.strip().str.title()
+
+	return sales, products, stores
+
+
+def load_clean_sales_dataset(
 	data_dir: str | Path | None = None,
 	validate_schema_first: bool = True,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, dict[str, pd.DataFrame]]:
@@ -85,4 +105,5 @@ def load_sales_dataset_and_validate(
 		validate_schema(sales, EXPECTED_SALES_SCHEMA)
 
 	issues = validate_sales_data(sales, products, stores)
-	return issues
+	sales, products, stores = clean_sales_data(sales, products, stores)
+	return sales, products, stores, issues
