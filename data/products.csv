@@ -1,23 +1,23 @@
-product_id,product_name,category
-P001,Wireless Mouse,Electronics
-P002,Mechanical Keyboard,Electronics
-P003,USB-C Hub,Electronics
-P004,Noise Cancelling Headphones,Electronics
-P005,Smartwatch,Electronics
-P006,Espresso Beans,Grocery
-P007,Olive Oil,Grocery
-P008,Granola,Grocery
-P009,Pasta,Grocery
-P010,Green Tea,Grocery
-P011,T-Shirt,Clothing
-P012,Denim Jeans,Clothing
-P013,Hoodie,Clothing
-P014,Sneakers,Clothing
-P015,Baseball Cap,Clothing
-P016,Desk Lamp,Home
-P017,Ceramic Mug,Home
-P018,Throw Blanket,Home
-P019,Yoga Mat,Fitness
-P020,Water Bottle,Fitness
-P021,Notebook,Stationery
-P022,Ballpoint Pens,Stationery
+product_id,product_name,category,price
+P001,Wireless Mouse,Electronics,79.09
+P002,Mechanical Keyboard,Electronics,99.19
+P003,USB-C Hub,Electronics,39.99
+P004,Noise Cancelling Headphones,Electronics,149.29
+P005,Smartwatch,Electronics,199.39
+P006,Espresso Beans,Grocery,12.49
+P007,Olive Oil,Grocery,14.59
+P008,Granola,Grocery,6.69
+P009,Pasta,Grocery,3.79
+P010,Green Tea,Grocery,7.89
+P011,T-Shirt,Clothing,19.99
+P012,Denim Jeans,Clothing,49.09
+P013,Hoodie,Clothing,39.19
+P014,Sneakers,Clothing,69.29
+P015,Baseball Cap,Clothing,12.39
+P016,Desk Lamp,Home,29.49
+P017,Ceramic Mug,Home,9.59
+P018,Throw Blanket,Home,34.69
+P019,Yoga Mat,Fitness,24.79
+P020,Water Bottle,Fitness,14.89
+P021,Notebook,Stationery,4.99
+P022,Ballpoint Pens,Stationery,2.09
