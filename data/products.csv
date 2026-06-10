@@ -1,0 +1,23 @@
+product_id,product_name,category
+P001,Wireless Mouse,Electronics
+P002,Mechanical Keyboard,Electronics
+P003,USB-C Hub,Electronics
+P004,Noise Cancelling Headphones,Electronics
+P005,Smartwatch,Electronics
+P006,Espresso Beans,Grocery
+P007,Olive Oil,Grocery
+P008,Granola,Grocery
+P009,Pasta,Grocery
+P010,Green Tea,Grocery
+P011,T-Shirt,Clothing
+P012,Denim Jeans,Clothing
+P013,Hoodie,Clothing
+P014,Sneakers,Clothing
+P015,Baseball Cap,Clothing
+P016,Desk Lamp,Home
+P017,Ceramic Mug,Home
+P018,Throw Blanket,Home
+P019,Yoga Mat,Fitness
+P020,Water Bottle,Fitness
+P021,Notebook,Stationery
+P022,Ballpoint Pens,Stationery
