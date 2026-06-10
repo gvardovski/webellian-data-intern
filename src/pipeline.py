@@ -92,6 +92,48 @@ def clean_sales_data(
 	return sales, products, stores
 
 
+def build_dim_date(sales: pd.DataFrame) -> pd.DataFrame:
+	dim_date = pd.DataFrame({
+		"date_id": sales["timestamp"].dt.date.unique()
+	})
+
+	dim_date["year"] = pd.to_datetime(dim_date["date_id"]).dt.year
+	dim_date["month"] = pd.to_datetime(dim_date["date_id"]).dt.month
+	dim_date["day"] = pd.to_datetime(dim_date["date_id"]).dt.day
+	dim_date["weekday"] = pd.to_datetime(dim_date["date_id"]).dt.day_name()
+
+	return dim_date.sort_values("date_id").reset_index(drop=True)
+
+
+def build_dim_product(products: pd.DataFrame) -> pd.DataFrame:
+	dim_product = products[["product_id", "product_name", "category"]].copy()
+	dim_product = dim_product.drop_duplicates(subset=["product_id"]).reset_index(drop=True)
+	return dim_product
+
+
+def build_dim_store(stores: pd.DataFrame) -> pd.DataFrame:
+	dim_store = stores[["store_id", "store_name", "city"]].copy()
+	dim_store = dim_store.drop_duplicates(subset=["store_id"]).reset_index(drop=True)
+	return dim_store
+
+
+def build_fact_sales(sales: pd.DataFrame) -> pd.DataFrame:
+	fact_sales = sales.copy()
+
+	if not pd.api.types.is_datetime64_any_dtype(fact_sales["timestamp"]):
+		fact_sales["timestamp"] = pd.to_datetime(fact_sales["timestamp"], errors="coerce")
+
+	if "total_sale" not in fact_sales.columns:
+		fact_sales["total_sale"] = round(fact_sales["quantity"] * fact_sales["price"], 2)
+
+	fact_sales["date_id"] = fact_sales["timestamp"].dt.date
+	fact_sales = fact_sales[
+		["sale_id", "product_id", "store_id", "date_id", "quantity", "price", "total_sale"]
+	].copy()
+
+	return fact_sales.sort_values("sale_id").reset_index(drop=True)
+
+
 def load_clean_sales_dataset(
 	data_dir: str | Path | None = None,
 	validate_schema_first: bool = True,
